@@ -20,11 +20,11 @@ Stretch - Delete feature of entered name at any position of the display section.
 
 Back Button - that will clear all data and bring user back to first page
 
-////////////////
-// Pseudo code
-////////////////
+/////////////////////////
+// Pseudo code 1st Page
+/////////////////////////
 
-// 1st Page
+// add btn + name deletes itself when control down and clicked
 function addBtnClicked() {
   if input field not empty
     create button element and use input value as innerText
@@ -35,15 +35,18 @@ function addBtnClicked() {
     throw error message "cannot submit empty field"
 }
 
-code to store user choice of subGroupSize
+// store subGroupSize
 const subGroupSize = document.querySelector("xxx").value;
 
+// store number of subGroups
 numOfSubGroups = Math.floor(overallGroupSize / subGroupSize);
 
-Generate Button
+// Generate Button
 generateBtn.addEventListener("click", generateSubGroups)
 
-// 2nd Page
+/////////////////////////
+// Pseudo code 2nd Page
+/////////////////////////
 
 function generateSubGroups(numOfSubGroups, subGroupSize) {
   if (all names have been subgrouped together before) {

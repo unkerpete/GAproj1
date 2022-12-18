@@ -5,9 +5,6 @@
 
 const arrNames = ["peterKuang", "weiLong", "joel", "daphne"];
 
-for (let i = 0; i<arrNames.length; i++) {
-  let arrNames[i] = [""];
-}
 
 console.log(peterKuang);
 
@@ -25,5 +22,5 @@ console.log(peterKuang);
 // allNames.peterKuang.hasMet.push(arrNames[3]);
 
 
-console.log(allNames.peterKuang.hasMet);
-console.log(arrNames);
+// console.log(allNames.peterKuang.hasMet);
+// console.log(arrNames);
