@@ -1,0 +1,110 @@
+//////////////
+// UI 1st Page
+//////////////
+
+Input field for names.
+Add Button for input field.
+Delete Button for last added name.
+Display section of current added names.
+Counter showing amount of names input so far.
+
+Input field for number of names per group.
+Generate button that goes to next page.
+
+Stretch - Add button to accept multiple names at single click.
+Stretch - Delete feature of entered name at any position of the display section. (hold down ctrl and click to delete?)
+
+//////////////
+// UI 2nd Page
+//////////////
+
+Back Button - that will clear all data and bring user back to first page
+
+////////////////
+// Pseudo code
+////////////////
+
+// 1st Page
+function addBtnClicked() {
+  if input field not empty
+    create button element and use input value as innerText
+    set class of "displayNames" for the buttons
+    addEventListener to each displayName btn (on hold ctrl down and clicked, it removes() itself)
+    append input value as a button into display section
+  else
+    throw error message "cannot submit empty field"
+}
+
+code to store user choice of subGroupSize
+const subGroupSize = document.querySelector("xxx").value;
+
+numOfSubGroups = Math.floor(overallGroupSize / subGroupSize);
+
+Generate Button
+generateBtn.addEventListener("click", generateSubGroups)
+
+// 2nd Page
+
+function generateSubGroups(numOfSubGroups, subGroupSize) {
+  if (all names have been subgrouped together before) {
+    ...... append div (") to bottom of page
+  } else {}
+}
+
+
+////////////////
+// others
+////////////////
+
+Num of sub-groups
+Given the overall-group size and sub-group size selected, how many sub-groups are required to assign all names? (e.g. overall-group: 15; sub-group size chosen: 5; sub-groups: 3).
+Need this info to know how many display containers required
+
+Num of sessions required for every name to be sub-grouped together at least once
+Is it numOfSubGroups = (overallGroupSize / SubGroupSize) + something ? 1?
+
+A B C D 
+AB CD     
+AC BD
+AD BC
+A has met all (AB, AC, AD)
+B has met all (AB, BD, BC) 
+C has met all (CD, AC, BC)
+D has met all (CD, BD, AD)
+
+A B C D E F
+ABC DEF     
+AEF BCD
+ABD CEF
+FBE ACD
+A has met all (ABC, AEF, ABD, ACD)
+B has met all (ABC, BCD, ABD, FBE) 
+C has met all (ABC, BCD, CEF, ACD)
+D has met all (DEF, BCD, ABD, ACD)
+E has met all (DEF, AEF, CEF, FBE)
+F has met all (DEF, AEF, CEF, FBE)
+Session 4 sub-group ACD has already met each other 
+
+A B C D E F G H I
+ABC DEF GHI    
+AEF BCD
+ABD CEF
+FBE ACD
+
+
+const allNames = {
+  peterKuang: {
+    subGroupedweiLong = false,
+    subGroupedjoel = false,
+    subGroupeddaphne = false,
+    etc
+    etc
+  },
+  weiLong: {
+    subGroupedpeterKuang = false,
+    subGroupedjoel = false,
+    subGroupeddaphne = false,
+    etc
+    etc
+  },
+} 
