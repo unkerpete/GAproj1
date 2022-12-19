@@ -43,7 +43,7 @@ numOfSubGroups = Math.floor(overallGroupSize / subGroupSize);
 
 // Generate Button
 generateBtn.addEventListener("click", generateSubGroups)
-
+kl
 /////////////////////////
 // Pseudo code 2nd Page
 /////////////////////////

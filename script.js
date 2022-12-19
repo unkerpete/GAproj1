@@ -42,34 +42,64 @@ let overallGroupSize = 0;
 // variable to store amount of members per sub-group
 let subGroupSize = 0;
 
+// variable to keep track of how many sessions created
+let sessionCounter = 1;
+
 // Generate Sub-Groups button function and push all names into an array
 function generateSubGroupsClicked() {
   // variable to store number of members per sub-group
   subGroupSize = document.querySelector("#subGroupSize").value;
-  // code to store each names into an array
+  // code to store each name (as an object) into an array
   const arrOfNames = document.querySelectorAll(".finalNames");
   for (let i = 0; i < arrOfNames.length; i++) {
-    allSubmittedNames.push(arrOfNames[i].innerText);
+    allSubmittedNames[i] = {
+      name: arrOfNames[i].innerText,
+      hasMet: []
+    }
   }
-  // store amount of members of the overall group
+  // variable to store amount of members of the overall group
   overallGroupSize = arrOfNames.length;
-  // calls next function to run
-  displayFirstSession();
+  // calls this function that will calc the subGroups(columns) required for display
+  createDisplayColumns(subGroupSize, overallGroupSize);
+
+  //calls this function that will append names to each group for session1 only
+  randomiseNames();
+
+  // disable options: disable or remove button
   // removes the click event listener on generate button, effectively allowing user to only click it ONCE *****maybe remove later*****
-  generateBtn.removeEventListener("click", generateSubGroupsClicked);
+  // generateBtn.removeEventListener("click", generateSubGroupsClicked);
+  // generateBtn.remove();
 }
 
-function displayFirstSession() {
+function createDisplayColumns(subGroupSize, overallGroupSize) {
+  const columnsRequired = Math.floor(overallGroupSize/subGroupSize);
+  const subGroupsDisplay = document.querySelector("#subGroupsDisplay");
+  subGroupsDisplay.innerHTML = 
+  `<div class="session text-center"><div class="row"><div class="col subGroupSession">Session ${sessionCounter}</div></div></div><button class="btn btn-success">Next Sub-Group</button>`;
+  for (let i = 1; i<columnsRequired+1; i++) {
+    const session = document.querySelector(".subGroupSession");
+    const groupNum = document.createElement("div");
+    groupNum.setAttribute("class", `col s${sessionCounter}g${i}`);
+    groupNum.innerText = `Group ${i}`;
+    session.appendChild(groupNum);
+  }
+  sessionCounter += 1;
+}
+
+function randomiseNames() {
   // shuffles the array of submitted names
   let shuffledSubmittedNames = allSubmittedNames.sort(
     () => Math.random() - 0.5
   );
 
-  // creates 1 row for the session, and the required number of columns to display each sub-group names
-  const subGroupDisplay = document.querySelector("#subGroupsDisplay");
-  for (let i = 0; i < 3; i++) {
-    const subGroupDiv = document.createElement("div");
-    subGroupDiv.innerText = "lalalaa";
-    subGroupDisplay.appendChild(subGroupDiv);
+  let tempArray =[];
+
+  for (let i = 0; i < shuffledSubmittedNames.length; i += subGroupSize) {
+    splitArray = shuffledSubmittedNames.slice(i, i+subGroupSize);
+    tempArray.push(splitArray);
   }
+
+  console.log(tempArray);
+  console.log(allSubmittedNames);
 }
+
