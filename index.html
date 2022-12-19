@@ -20,13 +20,13 @@
     <div class="inputContainer">
       <form id="form">
         <label for="namesInput">Enter name:</label>
-        <input id="namesInput" />
+        <input id="namesInput" type="" />
         <button class="btn btn-primary" id="addToDisplay">Add</button>
       </form>
     </div>
     <br />
     <!-- Display section of current added names and delete button for each name -->
-    <div class="container">
+    <div class="container displaySection">
       <table class="table">
         <thead>
           <tr>
@@ -34,38 +34,18 @@
             <th scope="col">Delete</th>
           </tr>
         </thead>
-        <tbody>
-          <tr>
-            <td class="finalNames">example name</td>
-            <td>
-              <button class="btn btn-danger">Delete</button>
-            </td>
-          </tr>
-          <tr>
-            <td class="finalNames">1stname</td>
-            <td>
-              <button class="btn btn-danger">Delete</button>
-            </td>
-          </tr>
-
-          <tr>
-            <td class="finalNames">2ndname</td>
-            <td>
-              <button class="btn btn-danger">Delete</button>
-            </td>
-          </tr>
-          <tr>
-            <td class="finalNames">3rdname</td>
-            <td>
-              <button class="btn btn-danger">Delete</button>
-            </td>
-          </tr>
-        </tbody>
+        <tbody></tbody>
       </table>
     </div>
     <!-- Generate list button and clear all button?-->
+    <div class="subGroupSizeContainer">
+      <input id="subGroupSize" type="number" />
+      <p>Members per Sub-Group</p>
+    </div>
     <div class="generateBtnContainer">
-      <button class="btn btn-success">Generate Sub-Groups</button>
+      <button class="btn btn-success" id="generateBtn">
+        Generate Sub-Groups
+      </button>
     </div>
     <script src="script.js"></script>
   </body>
