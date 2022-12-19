@@ -1,0 +1,13 @@
+.container {
+  height: 20em;
+  width: 50em;
+  overflow-y: scroll;
+}
+
+.inputContainer {
+  text-align: center;
+}
+.generateBtnContainer {
+  text-align: center;
+  margin-top: 2em;
+}
