@@ -11,9 +11,26 @@
 .generateBtnContainer {
   text-align: center;
   margin-top: 2em;
+  margin-bottom: 2em;
 }
 
 .subGroupSizeContainer {
   text-align: center;
   margin-top: 0em;
+}
+
+#subGroupsDisplay {
+  text-align: center;
+}
+
+.namesInSubGroups {
+  margin: 0;
+}
+
+.subGroupSession {
+  margin: auto;
+}
+
+.session {
+  margin-bottom: 50px;
 }

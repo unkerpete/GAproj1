@@ -30,22 +30,54 @@
       <table class="table">
         <thead>
           <tr>
-            <th scope="col">Names</th>
+            <th scope="col">Name</th>
             <th scope="col">Delete</th>
           </tr>
         </thead>
         <tbody></tbody>
       </table>
     </div>
-    <!-- Generate list button and clear all button?-->
+    <!-- Input field for subgroup size-->
     <div class="subGroupSizeContainer">
       <input id="subGroupSize" type="number" />
       <p>Members per Sub-Group</p>
     </div>
+    <!--- Generate Sub-Groups button -->
     <div class="generateBtnContainer">
       <button class="btn btn-success" id="generateBtn">
         Generate Sub-Groups
       </button>
+    </div>
+    <!-- display div for the subGroupings -->
+    <div id="subGroupsDisplay">
+      <div class="session text-center">
+        <div class="row">
+          <div class="col subGroupSession">Session 1</div>
+          <div class="col subGroupDisplayList">
+            Group 1
+            <p class="namesInSubGroups">Peter</p>
+            <p class="namesInSubGroups">daphne</p>
+            <p class="namesInSubGroups">joel</p>
+          </div>
+          <div class="col">Group 2</div>
+          <div class="col">Group 3</div>
+          <div class="col">Group 4</div>
+        </div>
+      </div>
+      <div class="session text-center">
+        <div class="row">
+          <div class="col subGroupSession">Session 2</div>
+          <div class="col subGroupDisplayList">
+            Group 1
+            <p class="namesInSubGroups">Peter</p>
+            <p class="namesInSubGroups">daphne</p>
+            <p class="namesInSubGroups">joel</p>
+          </div>
+          <div class="col">Group 2</div>
+          <div class="col">Group 3</div>
+          <div class="col">Group 4</div>
+        </div>
+      </div>
     </div>
     <script src="script.js"></script>
   </body>

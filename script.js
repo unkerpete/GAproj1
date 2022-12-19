@@ -14,7 +14,7 @@ function addToDisplay(e) {
   e.preventDefault();
   const newName = inputValue.value;
   if (newName !== "") {
-    // TO ADD: reject numbers
+    // **************TO ADD: reject numbers************
     const newTr = document.createElement("tr");
 
     // creates the new name and corresponding button
@@ -36,8 +36,11 @@ function addToDisplay(e) {
 // array container to store submitted names
 const allSubmittedNames = [];
 
-// variable to store number of members per sub-group
-let subGroupSize = "";
+// variable to store amount of members of the overall group
+let overallGroupSize = 0;
+
+// variable to store amount of members per sub-group
+let subGroupSize = 0;
 
 // Generate Sub-Groups button function and push all names into an array
 function generateSubGroupsClicked() {
@@ -48,10 +51,25 @@ function generateSubGroupsClicked() {
   for (let i = 0; i < arrOfNames.length; i++) {
     allSubmittedNames.push(arrOfNames[i].innerText);
   }
-  another();
+  // store amount of members of the overall group
+  overallGroupSize = arrOfNames.length;
+  // calls next function to run
+  displayFirstSession();
+  // removes the click event listener on generate button, effectively allowing user to only click it ONCE *****maybe remove later*****
+  generateBtn.removeEventListener("click", generateSubGroupsClicked);
 }
 
-function another() {
-  console.log(allSubmittedNames);
-  console.log(subGroupSize);
+function displayFirstSession() {
+  // shuffles the array of submitted names
+  let shuffledSubmittedNames = allSubmittedNames.sort(
+    () => Math.random() - 0.5
+  );
+
+  // creates 1 row for the session, and the required number of columns to display each sub-group names
+  const subGroupDisplay = document.querySelector("#subGroupsDisplay");
+  for (let i = 0; i < 3; i++) {
+    const subGroupDiv = document.createElement("div");
+    subGroupDiv.innerText = "lalalaa";
+    subGroupDisplay.appendChild(subGroupDiv);
+  }
 }
