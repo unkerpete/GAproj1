@@ -34,7 +34,7 @@ function addToDisplay(e) {
 }
 
 // array container to store submitted names
-const allNames = [];
+const allSubmittedNames = [];
 
 // variable to store number of members per sub-group
 let subGroupSize = "";
@@ -43,9 +43,15 @@ let subGroupSize = "";
 function generateSubGroupsClicked() {
   // variable to store number of members per sub-group
   subGroupSize = document.querySelector("#subGroupSize").value;
+  // code to store each names into an array
+  const arrOfNames = document.querySelectorAll(".finalNames");
+  for (let i = 0; i < arrOfNames.length; i++) {
+    allSubmittedNames.push(arrOfNames[i].innerText);
+  }
   another();
 }
 
 function another() {
+  console.log(allSubmittedNames);
   console.log(subGroupSize);
 }
