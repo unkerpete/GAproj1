@@ -115,17 +115,19 @@ function randomiseNames(arr, divider, subGroupsNum) {
   //     subGroup.append(nameInSubgroup);
   //   }
   // }
-  console.log(splitNames);
-  console.log(splitNames[0][0].name);
 
   // attempt 2 of appending groupings and names
   for (let i = 0; i < splitNames.length; i++) {
-    let namesInGroup = "";
-    for (let j = 0; j < splitNames[i][j]; j++) {
-      namesInGroup += splitNames[i][j].name;
-      displaySection.innerHTML += `<div> Group ${
-        i + 1
-      } - ${namesInGroup}</div>`;
-    }
+    const namesInGroup = splitNames[i].map((item) => {
+      return item.name;
+    });
+    console.log(namesInGroup);
+    const subGroup = document.createElement("div");
+    subGroup.innerText = `Group ${i + 1} - ${namesInGroup}`;
+    displaySection.append(subGroup);
+    // namesInGroup = [];
   }
+
+  // for (let i = 0; i < splitNames.length; i++) {
+  //   displaySection.innerHTML += `<div> Group ${i + 1}: ${splitNames[i]} </div>`;
 }
