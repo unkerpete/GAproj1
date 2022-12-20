@@ -93,7 +93,7 @@ function randomiseNames(arr, divider, subGroupsNum) {
   // shuffles the array of submitted names
   let shuffled = arr.sort(() => Math.random() - 0.5);
 
-  // split the shuffled array into nested arrays with elements of divider no.
+  // split the shuffled array into arrays
   const splitNames = [];
   for (let i = 0; i < subGroupsNum; i++) {
     const newGroup = [];
@@ -104,22 +104,10 @@ function randomiseNames(arr, divider, subGroupsNum) {
     splitNames.push(newGroup);
   }
 
-  // // append the groupings and names in them
-  // for (let i = 0; i < splitNames.length; i++) {
-  //   for (let j = 0; j < splitNames[j].length; j++) {
-  //     const nameInSubgroup = document.createElement("p");
-  //     nameInSubgroup.setAttribute("class", "namesInSubGroups");
-  //     nameInSubgroup.innerText = splitNames[j].name;
-  //     const subGroup = document.querySelector(`.s${sessionCounter}g${i + 1}`);
-  //     console.log(`.s${sessionCounter}g${i + 1}`);
-  //     subGroup.append(nameInSubgroup);
-  //   }
-  // }
-
-  // attempt 2 of appending groupings and names
+  // loops through the splitNames array. and in each inner array, loops through each element (object) to return the object's name property then 
   for (let i = 0; i < splitNames.length; i++) {
     const namesInGroup = splitNames[i].map((item) => {
-      return item.name;
+      return " "+item.name;
     });
     console.log(namesInGroup);
     const subGroup = document.createElement("div");
@@ -128,6 +116,4 @@ function randomiseNames(arr, divider, subGroupsNum) {
     // namesInGroup = [];
   }
 
-  // for (let i = 0; i < splitNames.length; i++) {
-  //   displaySection.innerHTML += `<div> Group ${i + 1}: ${splitNames[i]} </div>`;
 }

@@ -39,3 +39,8 @@ table {
   margin-left: auto;
   margin-right: auto;
 }
+
+.bottomDisplaySection {
+  text-align: center;
+  border: solid;
+}
