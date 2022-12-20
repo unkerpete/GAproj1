@@ -34,3 +34,8 @@
 .session {
   margin-bottom: 50px;
 }
+
+table {
+  margin-left: auto;
+  margin-right: auto;
+}

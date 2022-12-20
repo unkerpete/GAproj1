@@ -95,19 +95,8 @@ ABD CEF
 FBE ACD
 
 
-const allNames = {
-  peterKuang: {
-    subGroupedweiLong = false,
-    subGroupedjoel = false,
-    subGroupeddaphne = false,
-    etc
-    etc
-  },
-  weiLong: {
-    subGroupedpeterKuang = false,
-    subGroupedjoel = false,
-    subGroupeddaphne = false,
-    etc
-    etc
-  },
-} 
+
+
+
+array of objects with properties name and hasMet
+
