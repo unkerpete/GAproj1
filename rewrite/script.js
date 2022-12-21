@@ -82,9 +82,8 @@ function generateSubGroupsClicked() {
 function randomiseNames(arr, divider, subGroupsNum) {
   // shuffles the array of submitted names
   let shuffled = arr.sort(() => Math.random() - 0.5);
-  console.log(shuffled);
+  // console.log(shuffled);
   // split the shuffled array into arrays
-  // splitNames = [];
   for (let i = 0; i < subGroupsNum; i++) {
     const newGroup = [];
     for (let j = 0; j < divider; j++) {
@@ -129,16 +128,47 @@ function randomiseNames(arr, divider, subGroupsNum) {
   displaySection.append(subsequentGenerationBtn);
 }
 
-// // Update the hasMet property of the objects in the main allSubmittedNames array with the name value of the other objects who were just grouped
-// function updateMainArray(latestSubGrouping) {
-//   for (let i = 0; i < latestSubGrouping; i++) {
-
-//   }
-
+//  
 function generateNextGroup(previousGrouping) {
+  // container to store next subGrouping
   let newGrouping = [];
+ 
+  // loops through the previous array of arrays (), and pops the last member from each group to store in a tempArr. The tempArr will then be pushed into the newGrouping array to form the first subgroup of the newGrouping.
   let tempArr = [];
   for (let i = 0; i < subGroupSize; i++) {
-    tempArr[i] = previousGrouping[i].pop();
+    let newMember = previousGrouping[i].pop();
+    tempArr.push(newMember);
   }
+  newGrouping.push(tempArr);
+
+  // the remaining names in the previousGrouping arr will then be pushed individually (they are currently in multiple nested arrays) into the leftOvers array
+  let leftOvers = [];
+  for (let i = 0; i < previousGrouping.length; i++) {
+    for (let j = 0; j <previousGrouping[i].length; j++) {
+      leftOvers.push(previousGrouping[i][j]);
+    }
+  }
+
+  // randomise the leftOvers array
+  leftOvers.sort(() => Math.random() - 0.5);
+
+  // loops through the leftOvers array to create new
+  for (let i = 0; i < subGroupsRequired - 1; i++) {
+    let tempArr = [];
+    for (let j = 0; j < subGroupSize; j++) {
+      let newMember = leftOvers.pop()
+      tempArr.push(newMember);
+    }
+    newGrouping.push(tempArr);
+  }
+  // console.log(newGrouping);
+
+//   for (let i = 0; i < newGrouping.length; i++) {
+//     const namesInGroup = newGrouping[i];
+//     // appends the namesInGroup array in displaySection.
+//     const subGroup = document.createElement("div");
+//     subGroup.innerText = `Group ${i + 1} - ${namesInGroup}`;
+//     displaySection.append(subGroup);
+//   }
+// }
 }
