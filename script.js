@@ -9,6 +9,19 @@ const generateBtn = document.querySelector("#generateBtn");
 addBtn.addEventListener("click", addToDisplay);
 generateBtn.addEventListener("click", generateSubGroupsClicked);
 
+// array container to store submitted names
+const allSubmittedNames = [];
+let splitNames = [];
+
+// variable to store amount of members of the overall group
+let overallGroupSize = 0;
+
+// variable to keep track of how many sessions created
+let sessionCounter = 1;
+
+// variable to store number of groups required
+let subGroupsRequired = 0;
+
 // display input names and corresponding delete button to display section
 function addToDisplay(e) {
   e.preventDefault();
@@ -30,30 +43,24 @@ function addToDisplay(e) {
     document.querySelector(`#${newName}del`).addEventListener("click", (e) => {
       document.querySelector(`#${newName}`).parentElement.remove();
     });
+  } else {
+    alert("Please enter a name");
   }
 }
-
-// array container to store submitted names
-const allSubmittedNames = [];
-
-// variable to store amount of members of the overall group
-let overallGroupSize = 0;
-
-// variable to keep track of how many sessions created
-let sessionCounter = 1;
-
-// variable to store number of groups required
-let columnsRequired = 0;
 
 // Generate Sub-Groups button function and push all names into an array
 function generateSubGroupsClicked() {
   // code to store each name (as an object) into an array
   const arrOfNames = document.querySelectorAll(".finalNames");
+
   // variable to store number of members per sub-group
   const subGroupSize = document.querySelector("#subGroupSize").value;
+
+  // store all submitted names as an object in the allSubmittedNames array with some properties
   for (let i = 0; i < arrOfNames.length; i++) {
     allSubmittedNames[i] = {
       name: arrOfNames[i].innerText,
+      tracker: i + 1,
       hasMet: [],
     };
   }
@@ -63,11 +70,11 @@ function generateSubGroupsClicked() {
   // calls this function that will calc the subGroups(columns) required for display
   // createDisplayColumns(subGroupSize, overallGroupSize)
 
-  // store number of groups required
-  const groupsRequired = Math.floor(overallGroupSize / subGroupSize);
+  // update number of groups required
+  subGroupsRequired = Math.floor(overallGroupSize / subGroupSize);
 
   //calls this function that will append names to each group for session1 only
-  randomiseNames(allSubmittedNames, subGroupSize, groupsRequired);
+  randomiseNames(allSubmittedNames, subGroupSize, subGroupsRequired);
 
   // disable options: disable or remove button
   // removes the click event listener on generate button, effectively allowing user to only click it ONCE *****maybe remove later*****
@@ -75,26 +82,12 @@ function generateSubGroupsClicked() {
   // generateBtn.remove();
 }
 
-function createDisplayColumns(subGroupSize, overallGroupSize) {
-  columnsRequired = Math.floor(overallGroupSize / subGroupSize);
-  const subGroupsDisplay = document.querySelector("#subGroupsDisplay");
-  subGroupsDisplay.innerHTML = `<div class="session text-center"><div class="row"><div class="col subGroupSession">Session ${sessionCounter}</div></div></div>`;
-  for (let i = 1; i < columnsRequired + 1; i++) {
-    const session = document.querySelector(".subGroupSession");
-    const groupNum = document.createElement("div");
-    groupNum.setAttribute("class", `col s${sessionCounter}g${i}`);
-    groupNum.innerText = `Group ${i}`;
-    session.appendChild(groupNum);
-  }
-  sessionCounter += 1;
-}
-
 function randomiseNames(arr, divider, subGroupsNum) {
   // shuffles the array of submitted names
   let shuffled = arr.sort(() => Math.random() - 0.5);
 
   // split the shuffled array into arrays
-  const splitNames = [];
+  // splitNames = [];
   for (let i = 0; i < subGroupsNum; i++) {
     const newGroup = [];
     for (let j = 0; j < divider; j++) {
@@ -104,16 +97,57 @@ function randomiseNames(arr, divider, subGroupsNum) {
     splitNames.push(newGroup);
   }
 
-  // loops through the splitNames array. and in each inner array, loops through each element (object) to return the object's name property then 
+  // loops through the splitNames main array. and in each inner array, maps each element (which is an object here) to return the object's name property value and store inside a new array NamesInGroup.
   for (let i = 0; i < splitNames.length; i++) {
     const namesInGroup = splitNames[i].map((item) => {
-      return " "+item.name;
+      return " " + item.name;
     });
-    console.log(namesInGroup);
+    // appends the namesInGroup array in displaySection.
     const subGroup = document.createElement("div");
     subGroup.innerText = `Group ${i + 1} - ${namesInGroup}`;
     displaySection.append(subGroup);
-    // namesInGroup = [];
   }
 
+  // append the session number to the first grouping
+  const sessionNum = document.createElement("div");
+  sessionNum.innerText = `Session ${sessionCounter}`;
+  displaySection.insertBefore(sessionNum, displaySection.firstChild);
+
+  // increase the sessionCounter by 1 for the next subgroup generation
+  sessionCounter++;
+
+  // removes the first generate session button and creates a new generate button the existing.
+  generateBtn.remove();
+
+  // // update the hasMet property of the objects in the main allSubmittedNames array with the name value of the other objects who were just grouped
+  // updateMainArray(splitNames);
+
+  // creates a new button that generates the next session of subGrouping
+  const subsequentGenerationBtn = document.createElement("button");
+  subsequentGenerationBtn.innerText = "Next Session";
+  subsequentGenerationBtn.setAttribute("class", "btn btn-success");
+  subsequentGenerationBtn.setAttribute("id", "subsequentGeneration");
+  subsequentGenerationBtn.addEventListener(
+    "click",
+    generateNextGroup(splitNames)
+  );
+  displaySection.append(subsequentGenerationBtn);
+}
+
+// // Update the hasMet property of the objects in the main allSubmittedNames array with the name value of the other objects who were just grouped
+// function updateMainArray(latestSubGrouping) {
+//   for (let i = 0; i < latestSubGrouping; i++) {
+
+//   }
+
+function generateNextGroup(previousGrouping) {
+  console.log(previousGrouping);
+  // let tempArr = [];
+  // for (let i = 0; i < subGroupsRequired; i++) {
+  //   tempArr = previousGrouping.map(() => {
+  //     return previousGrouping[i].pop();
+  //   });
+  // }
+  // console.log(tempArr);
+  // console.log(previousGrouping);
 }

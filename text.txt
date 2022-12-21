@@ -100,3 +100,7 @@ FBE ACD
 
 array of objects with properties name and hasMet
 
+
+// accepting multiple names at once
+accept string
+take string replace 
