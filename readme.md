@@ -1,7 +1,7 @@
 # Group'em
 
 ## Intro
-This project aims to build a tool for splitting a main group of names randomly into smaller sub-groups. This tool was intended to be used as an ice breaking tool for a group of 15 students by splitting them randomly into groups of 3.
+This project aims to build a tool for splitting a main group of names randomly into smaller sub-groups. This tool was first intended to be used as an ice breaking tool for a group of 15 students by splitting them randomly into groups of 3.
 Why 3? It is the author's belief that 3 is an optimal number for a team to work efficiently together. You may wish to read https://www.forbes.com/sites/jaimepotter/2020/04/27/the-ideal-team-size-at-work-may-be-smaller-than-you-think/?sh=2ca47bd2630a
 
 ## Tech used
@@ -12,7 +12,7 @@ The interface will allow a user to add a name individually or a group of names(s
 
 User can then click to generate the first session of randomised sub-grouping and click again for subsequent sessions of randomised sub-grouping.
 
-**Limitations and unsolved problems will be explained in the last section of this document.**
+**Limitations and unsolved problems will be explained below.**
 
 ## Approach
 To create the first randomised session of sub-grouping:
@@ -37,14 +37,34 @@ overallGroupSize refers to the amount of names of the overall group;
 subGroupSize refers to the amount of names in a sub-group;
 subGroupNum refers to the amount of sub-groups per session;
 
-**SubGroupSize needs to be a smaller number than SubGroupNum**
+**Limitation: subGroupSize needs to be a smaller number than subGroupNum**
 Because of the method explained above in the approach section, i.e. taking the last name of each sub-group to form the first sub-group for the next session, the program will not be able to sub-group beyond the 1st session when subGroupSize is larger than SubGroupNum. This is visualised better below:
 
 [[a, b, c, d],
  [e, f, g, h],
  [i, j, k, l]]
 
-The last elements of each inner array (d, h, l), will not be enough to form the required subGroupSize of 4 elements.
+The last elements of each inner array (d, h, l) will not be enough to form the required subGroupSize of 4 elements. 
 
-**SubGroupSize needs to be a factor of overallGroupSize**
-The
+Our approach works best when randomising overallGroupSize of square numbers into subGroupSizes of its square root. Such as an overallGroupSize of 9 being randomised into subGroupSizes of 3, or overallGroupSize of 16 being randomised into subGroupSizes of 4.
+
+[[a, b, c],
+ [d, e, f],
+ [g, h, i]]
+
+[[a, b, c, d],
+ [e, f, g, h],
+ [i, j, k, l],
+ [m, n, o, p]]
+
+ This program currently throws an alert to the user when subGroupSizes is a smaller number than SubGroupNum.
+
+**Limitation: subGroupSize needs to be a factor of overallGroupSize**
+The program currently only accept, subject to other limitations, subGroupSizes that are a factor of the overallGroupSize. 
+
+**Modify these limitations on line 86**
+
+## Further work/features
+As it is now, this program only ensures unique sub-groupings up to Session 3.
+
+We hope to improve this program to where it can generate a list of sessions and unique sub-groupings. To the point where it ensures each name in the overallGroup has been placed in the same sub-group all other names at least once.
