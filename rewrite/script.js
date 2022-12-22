@@ -28,24 +28,29 @@ let subGroupSize = 0;
 // display input names and corresponding delete button to display section
 function addToDisplay(e) {
   e.preventDefault();
-  const newName = inputValue.value;
-  if (newName !== "") {
-    // **************TO ADD: reject numbers************
-    const newTr = document.createElement("tr");
-
+  let newName = inputValue.value.split(" ");
+  console.log(newName);
+  if (newName !== null) {
     // creates the new name and corresponding button
-    newTr.innerHTML = `<td class="finalNames" id="${newName}">${newName}</td><td><button class="btn btn-danger btnDelete" id="${newName}del">Delete</button></td>`;
+    for (let i = 0; i < newName.length; i++) {
+      let newTr = document.createElement("tr");
+      newTr.innerHTML = `<td class="finalNames" id="${newName[i]}">${newName[i]}</td><td><button class="btn btn-danger btnDelete" id="${newName[i]}del">Delete</button></td>`;
 
-    // appends the new names unto the display
-    displayTBody.append(newTr);
+      // appends the new names unto the display
+      displayTBody.append(newTr);
+
+      document
+        .querySelector(`#${newName[i]}del`)
+        .addEventListener("click", (e) => {
+          document.querySelector(`#${newName[i]}del`).parentElement.remove();
+        });
+    }
 
     // resets the input field to empty
     inputValue.value = "";
 
-    // make the delete buttons delete itself and name
-    document.querySelector(`#${newName}del`).addEventListener("click", (e) => {
-      document.querySelector(`#${newName}`).parentElement.remove();
-    });
+    // resets the newName arrays to empty
+    newName = [];
   } else {
     alert("Please enter a name");
   }
