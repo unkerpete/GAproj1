@@ -36,14 +36,15 @@ function addToDisplay(e) {
       let newTr = document.createElement("tr");
       newTr.innerHTML = `<td class="finalNames" id="${newName[i]}">${newName[i]}</td><td><button class="btn btn-danger btnDelete" id="${newName[i]}del">Delete</button></td>`;
 
-      // appends the new names unto the display
+      // // appends the new names unto the display
       displayTBody.append(newTr);
 
-      document
-        .querySelector(`#${newName[i]}del`)
-        .addEventListener("click", (e) => {
-          document.querySelector(`#${newName[i]}del`).parentElement.remove();
-        });
+      let x = newName[i];
+
+      const deletebtn = document.querySelector(`#${newName[i]}del`);
+      deletebtn.addEventListener("click", () => {
+        document.querySelector(`#${x}`).parentElement.remove();
+      });
     }
 
     // resets the input field to empty
