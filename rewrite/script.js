@@ -125,7 +125,7 @@ function randomiseNames(arr, divider, subGroupsNum) {
   } else alert("Sub-Group size cannot be less than the number of Sub-Groups");
 }
 
-//
+// this will be the function that will generate all subsequent sessions
 function generateNextGroup() {
   document.querySelector("#subsequentGeneration").remove();
   // container to store next subGrouping
@@ -150,7 +150,7 @@ function generateNextGroup() {
   // randomise the leftOvers array
   leftOvers.sort(() => Math.random() - 0.5);
 
-  // loops through the leftOvers array to create new
+  // loops through the leftOvers array to create a new arrays of subgroups and push those new arrays to the newGrouping array
   for (let i = 0; i < subGroupsRequired - 1; i++) {
     let tempArr = [];
     for (let j = 0; j < subGroupSize; j++) {
