@@ -72,80 +72,72 @@ function generateSubGroupsClicked() {
 
   //calls this function that will append names to each group for session1 only
   randomiseNames(allSubmittedNames, subGroupSize, subGroupsRequired);
-
-  // disable options: disable or remove button
-  // removes the click event listener on generate button, effectively allowing user to only click it ONCE *****maybe remove later*****
-  // generateBtn.removeEventListener("click", generateSubGroupsClicked);
-  // generateBtn.remove();
 }
 
 function randomiseNames(arr, divider, subGroupsNum) {
-  // shuffles the array of submitted names
-  let shuffled = arr.sort(() => Math.random() - 0.5);
-  // console.log(shuffled);
-  // split the shuffled array into arrays
-  for (let i = 0; i < subGroupsNum; i++) {
-    const newGroup = [];
-    for (let j = 0; j < divider; j++) {
-      let member = shuffled.pop();
-      newGroup.push(member);
+  if (subGroupSize < subGroupsRequired) {
+    // shuffles the array of submitted names
+    let shuffled = arr.sort(() => Math.random() - 0.5);
+    // console.log(shuffled);
+    // split the shuffled array into arrays
+    for (let i = 0; i < subGroupsNum; i++) {
+      const newGroup = [];
+      for (let j = 0; j < divider; j++) {
+        let member = shuffled.pop();
+        newGroup.push(member);
+      }
+      splitNames.push(newGroup);
     }
-    splitNames.push(newGroup);
-  }
 
-  // loops through the splitNames main array. and in each inner array, maps each element (which is an object here) to return the object's name property value and store inside a new array NamesInGroup.
-  for (let i = 0; i < splitNames.length; i++) {
-    const namesInGroup = splitNames[i];
-    // appends the namesInGroup array in displaySection.
-    const subGroup = document.createElement("div");
-    subGroup.innerText = `Group ${i + 1} - ${namesInGroup}`;
-    displaySection.append(subGroup);
-  }
+    // loops through the splitNames main array. and in each inner array, maps each element (which is an object here) to return the object's name property value and store inside a new array NamesInGroup.
+    for (let i = 0; i < splitNames.length; i++) {
+      const namesInGroup = splitNames[i];
+      // appends the namesInGroup array in displaySection.
+      const subGroup = document.createElement("div");
+      subGroup.innerHTML = `Group ${i + 1} - ${namesInGroup}`;
+      displaySection.append(subGroup);
+    }
 
-  // append the session number to the first grouping
-  const sessionNum = document.createElement("div");
-  sessionNum.innerText = `Session ${sessionCounter}`;
-  displaySection.insertBefore(sessionNum, displaySection.firstChild);
+    // append the session number to the first grouping
+    const sessionNum = document.createElement("div");
+    sessionNum.innerText = `Session ${sessionCounter}`;
+    displaySection.insertBefore(sessionNum, displaySection.firstChild);
 
-  // increase the sessionCounter by 1 for the next subgroup generation
-  sessionCounter++;
+    // increase the sessionCounter by 1 for the next subgroup generation
+    sessionCounter++;
 
-  // removes the first generate session button and creates a new generate button the existing.
-  generateBtn.remove();
+    // removes the first generate session button and creates a new generate button the existing.
+    generateBtn.remove();
 
-  // // update the hasMet property of the objects in the main allSubmittedNames array with the name value of the other objects who were just grouped
-  // updateMainArray(splitNames);
-
-  // creates a new button that generates the next session of subGrouping
-  const subsequentGenerationBtn = document.createElement("button");
-  subsequentGenerationBtn.innerText = "Next Session";
-  subsequentGenerationBtn.setAttribute("class", "btn btn-success");
-  subsequentGenerationBtn.setAttribute("id", "subsequentGeneration");
-  subsequentGenerationBtn.addEventListener(
-    "click",
-    generateNextGroup(splitNames)
-  );
-  displaySection.append(subsequentGenerationBtn);
+    // creates a new button that generates the next session of subGrouping
+    const subsequentGenerationBtn = document.createElement("button");
+    subsequentGenerationBtn.innerText = "Next Session";
+    subsequentGenerationBtn.setAttribute("class", "btn btn-success");
+    subsequentGenerationBtn.setAttribute("id", "subsequentGeneration");
+    subsequentGenerationBtn.addEventListener("click", generateNextGroup);
+    displaySection.append(subsequentGenerationBtn);
+  } else alert("Sub-Group size cannot be less than the number of Sub-Groups");
 }
 
-//  
-function generateNextGroup(previousGrouping) {
+//
+function generateNextGroup() {
+  document.querySelector("#subsequentGeneration").remove();
   // container to store next subGrouping
   let newGrouping = [];
- 
+
   // loops through the previous array of arrays (), and pops the last member from each group to store in a tempArr. The tempArr will then be pushed into the newGrouping array to form the first subgroup of the newGrouping.
   let tempArr = [];
   for (let i = 0; i < subGroupSize; i++) {
-    let newMember = previousGrouping[i].pop();
+    let newMember = splitNames[i].pop();
     tempArr.push(newMember);
   }
   newGrouping.push(tempArr);
 
   // the remaining names in the previousGrouping arr will then be pushed individually (they are currently in multiple nested arrays) into the leftOvers array
   let leftOvers = [];
-  for (let i = 0; i < previousGrouping.length; i++) {
-    for (let j = 0; j <previousGrouping[i].length; j++) {
-      leftOvers.push(previousGrouping[i][j]);
+  for (let i = 0; i < splitNames.length; i++) {
+    for (let j = 0; j < splitNames[i].length; j++) {
+      leftOvers.push(splitNames[i][j]);
     }
   }
 
@@ -156,19 +148,33 @@ function generateNextGroup(previousGrouping) {
   for (let i = 0; i < subGroupsRequired - 1; i++) {
     let tempArr = [];
     for (let j = 0; j < subGroupSize; j++) {
-      let newMember = leftOvers.pop()
+      let newMember = leftOvers.pop();
       tempArr.push(newMember);
     }
     newGrouping.push(tempArr);
   }
-  // console.log(newGrouping);
 
-//   for (let i = 0; i < newGrouping.length; i++) {
-//     const namesInGroup = newGrouping[i];
-//     // appends the namesInGroup array in displaySection.
-//     const subGroup = document.createElement("div");
-//     subGroup.innerText = `Group ${i + 1} - ${namesInGroup}`;
-//     displaySection.append(subGroup);
-//   }
-// }
+  // appends the current session number
+  const sessionNum = document.createElement("div");
+  sessionNum.innerText = `Session ${sessionCounter}`;
+  displaySection.append(sessionNum);
+  sessionCounter++;
+
+  //appends the namesInGroup array in displaySection.
+  for (let i = 0; i < newGrouping.length; i++) {
+    const namesInGroup = newGrouping[i];
+    const subGroup = document.createElement("div");
+    subGroup.innerText = `Group ${i + 1} - ${namesInGroup}`;
+    displaySection.append(subGroup);
+  }
+
+  splitNames = newGrouping;
+
+  // appends for generation button for subsequent sessions
+  const subsequentGenerationBtn = document.createElement("button");
+  subsequentGenerationBtn.innerText = "Next Session";
+  subsequentGenerationBtn.setAttribute("class", "btn btn-success");
+  subsequentGenerationBtn.setAttribute("id", "subsequentGeneration");
+  subsequentGenerationBtn.addEventListener("click", generateNextGroup);
+  displaySection.append(subsequentGenerationBtn);
 }
