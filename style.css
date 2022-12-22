@@ -44,3 +44,8 @@ table {
   text-align: center;
   border: solid;
 }
+
+.description {
+  margin-left: 5em;
+  margin-top: 2em;
+}
