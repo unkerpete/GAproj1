@@ -8,9 +8,9 @@ Why 3? It is the author's belief that 3 is an optimal number for a team to work 
 HTML, CSS, vanilla Javascript, css elements from getbootstrap.com
 
 ## How to use
-<p>The interface will allow a user to add a name individually or a group of names(separated by a space) to their screen. Names added will also be attached with its own delete feature for user to remove names. User then enters a limited choice of the size (number of members) of the sub-group that they want to split their main group into.</p>
+The interface will allow a user to add a name individually or a group of names(separated by a space) to their screen. Names added will also be attached with its own delete feature for user to remove names. User then enters a limited choice of the size (number of members) of the sub-group that they want to split their main group into.
 
-<p>User can then click to generate the first session of randomised sub-grouping and click again for subsequent sessions of randomised sub-grouping.
+User can then click to generate the first session of randomised sub-grouping and click again for subsequent sessions of randomised sub-grouping.
 
 **Limitations and unsolved problems will be explained below.**
 
@@ -22,7 +22,7 @@ To create the first randomised session of sub-grouping:
 <li>each sub-group array is then pushed into a new array</li> 
 <li>the new array will now have nested arrays of sub-groups which will be appended onto the html doc</li> 
 
-To create the second and any subsequent sessions of sub-grouping:
+<br>To create the second and any subsequent sessions of sub-grouping:</br>
 <li>a loop is used to pop the last name of each sub-group (thats runs the equivalent amount of time as the subGroupSize) from the previous grouping. These names will form the first array of sub-group of the subsequent session, and pushed into another array. i.e. [c, f, i] will be obtained from [[a, b, c], [d, e, f], [g, h, i]].</li>
  <li>the left overs are then joined together in an array and randomised again</li> 
 <li>this newly randomised array will then go through a loop process that the names into new sub-groups arrays</li> 
@@ -37,9 +37,9 @@ To create the second and any subsequent sessions of sub-grouping:
 <br>subGroupNum refers to the amount of sub-groups per session;</p>
 
 **Limitation: subGroupSize needs to be a smaller number than subGroupNum**
-<br>Because of the method explained above in the approach section, i.e. taking the last name of each sub-group to form the first sub-group for the next session, the program will not be able to sub-group beyond the 1st session when subGroupSize is larger than SubGroupNum. This is visualised better below:
+Because of the method explained above in the approach section, i.e. taking the last name of each sub-group to form the first sub-group for the next session, the program will not be able to sub-group beyond the 1st session when subGroupSize is larger than SubGroupNum. This is visualised better below:
 
-<br>[[a, b, c, d],
+[[a, b, c, d],
 <br>[e, f, g, h],
 <br>[i, j, k, l]]
 
@@ -47,11 +47,11 @@ The last elements of each inner array (d, h, l) will not be enough to form the r
 
 Our approach works best when randomising overallGroupSize of square numbers into subGroupSizes of its square root. Such as an overallGroupSize of 9 being randomised into subGroupSizes of 3, or overallGroupSize of 16 being randomised into subGroupSizes of 4.
 
-<br>[[a, b, c],
+[[a, b, c],
  <br>[d, e, f],
  <br>[g, h, i]]
 
-<br>[[a, b, c, d],
+[[a, b, c, d],
  <br>[e, f, g, h],
  <br>[i, j, k, l],
  <br>[m, n, o, p]]
