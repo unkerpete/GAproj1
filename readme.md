@@ -16,19 +16,18 @@ HTML, CSS, vanilla Javascript, css elements from getbootstrap.com
 
 ## Approach
 To create the first randomised session of sub-grouping:
-<br>-the list of names added are stored in an array
-<br>-the array is then randomised
-<br>-using a nested for loop, the inner loops pops the randomised array for X amount of times for X value of the subGroupSize into a new array that represents a sub-group. And the outer loop repeats the inner loop process Y number of times for Y value of subGroups required.
-<br>-each sub-group array is then pushed into a new array
-<br>-the new array will now have nested arrays of sub-groups which will be appended onto the html doc
+<li>the list of names added are stored in an array</li> 
+<li>the array is then randomised</li> 
+<li>using a nested for loop, the inner loops pops the randomised array for X amount of times for X value of the subGroupSize into a new array that represents a sub-group. And the outer loop repeats the inner loop process Y number of times for Y value of subGroups required.</li> </li> 
+<li>each sub-group array is then pushed into a new array</li> 
+<li>the new array will now have nested arrays of sub-groups which will be appended onto the html doc</li> 
 
 To create the second and any subsequent sessions of sub-grouping:
-<br>-a loop is used to pop the last name of each sub-group (thats runs the equivalent amount of time as the subGroupSize) from the previous grouping. These names will form the first array of sub-group of the subsequent session, and pushed into another array
-i.e. [c, f, i] will be obtained from [[a, b, c], [d, e, f], [g, h, i]].
-<br>-the left overs are then joined together in an array and randomised again
-<br>-this newly randomised array will then go through a loop process that the names into new sub-groups arrays
-<br>-these new sub-groups will then be pushed into the same array that is currently holding the first array of sub-group
-<br>-this array of sub-groups arrays is then appended into the html doc
+<li>a loop is used to pop the last name of each sub-group (thats runs the equivalent amount of time as the subGroupSize) from the previous grouping. These names will form the first array of sub-group of the subsequent session, and pushed into another array. i.e. [c, f, i] will be obtained from [[a, b, c], [d, e, f], [g, h, i]].</li>
+ <li>the left overs are then joined together in an array and randomised again</li> 
+<li>this newly randomised array will then go through a loop process that the names into new sub-groups arrays</li> 
+<li>these new sub-groups will then be pushed into the same array that is currently holding the first array of sub-group</li> 
+<li>this array of sub-groups arrays is then appended into the html doc</li> 
 
 ## Limitations and Unsolved Problems
 
@@ -38,15 +37,15 @@ i.e. [c, f, i] will be obtained from [[a, b, c], [d, e, f], [g, h, i]].
 <br>subGroupNum refers to the amount of sub-groups per session;</p>
 
 **Limitation: subGroupSize needs to be a smaller number than subGroupNum**
-<p>Because of the method explained above in the approach section, i.e. taking the last name of each sub-group to form the first sub-group for the next session, the program will not be able to sub-group beyond the 1st session when subGroupSize is larger than SubGroupNum. This is visualised better below:</p>
+<br>Because of the method explained above in the approach section, i.e. taking the last name of each sub-group to form the first sub-group for the next session, the program will not be able to sub-group beyond the 1st session when subGroupSize is larger than SubGroupNum. This is visualised better below:
 
 <br>[[a, b, c, d],
 <br>[e, f, g, h],
 <br>[i, j, k, l]]
 
-<p>The last elements of each inner array (d, h, l) will not be enough to form the required subGroupSize of 4 elements.</p>
+The last elements of each inner array (d, h, l) will not be enough to form the required subGroupSize of 4 elements.
 
-<p>Our approach works best when randomising overallGroupSize of square numbers into subGroupSizes of its square root. Such as an overallGroupSize of 9 being randomised into subGroupSizes of 3, or overallGroupSize of 16 being randomised into subGroupSizes of 4.</p>
+Our approach works best when randomising overallGroupSize of square numbers into subGroupSizes of its square root. Such as an overallGroupSize of 9 being randomised into subGroupSizes of 3, or overallGroupSize of 16 being randomised into subGroupSizes of 4.
 
 <br>[[a, b, c],
  <br>[d, e, f],
@@ -57,7 +56,7 @@ i.e. [c, f, i] will be obtained from [[a, b, c], [d, e, f], [g, h, i]].
  <br>[i, j, k, l],
  <br>[m, n, o, p]]
 
- This program currently throws an alert to the user when subGroupSizes is a smaller number than SubGroupNum.
+This program currently throws an alert to the user when subGroupSizes is a smaller number than SubGroupNum.
 
 **Limitation: subGroupSize needs to be a factor of overallGroupSize**
 The program currently only accept, subject to other limitations, subGroupSizes that are a factor of the overallGroupSize. 
